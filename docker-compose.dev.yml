@@ -1,0 +1,50 @@
+version: '3'
+services:
+  auth-api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: auth-api-nodejs
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_HOSTNAME=${MONGO_HOSTNAME}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_DB=${MONGO_DB}
+    ports:
+      - ${AUTH_API_PORT}:${AUTH_API_PORT}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - mfhnetwork
+    depends_on:
+      - mongodb-auth
+    command: /usr/src/app/node_modules/.bin/nodemon app.js
+
+  mongodb-auth:
+    build:
+      context: ./mongodb-auth-api
+      dockerfile: Dockerfile
+    container_name: auth-api-mongodb
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+    volumes:
+      - mongodb-auth-data:/data/db # Mount a volume for MongoDB data
+    networks:
+      - mfhnetwork
+    
+volumes:
+  mongodb-auth-data:
+  node_modules:
+
+networks:
+  mfhnetwork:
+     driver: bridge # enables communication between containers since they are on the same Docker daemon host
