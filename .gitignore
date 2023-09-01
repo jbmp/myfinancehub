@@ -1,0 +1,34 @@
+# Node.js / NPM
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+.pnpm-store/
+yarn.lock
+.pnpm-lock.yaml
+
+# Output files
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# Local development files
+*.env.local
+.env.*.local
+
+# Production build
+build/
