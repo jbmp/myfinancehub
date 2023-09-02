@@ -4,9 +4,9 @@ require('dotenv').config();
 const {
   MONGO_USERNAME = 'dev_user',
   MONGO_PASSWORD = 'dev_password',
-  MONGO_HOSTNAME = 'mongodb-auth',
+  MONGO_HOSTNAME = 'auth-api-db',
   MONGO_PORT = '27017',
-  MONGO_DB = 'auth_db'
+  MONGO_DB = 'authApiDb'
 } = process.env;
 
 const options = {

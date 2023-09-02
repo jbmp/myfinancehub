@@ -29,9 +29,9 @@ Create a `.env` file (default values shown below, otherwise) in the root directo
 * 
 * `MONGO_USERNAME` - MongoDB username (default: `dev_user`)
 * `MONGO_PASSWORD` - MongoDB password (default: `dev_password`)
-* `MONGO_HOSTNAME` - MongoDB hostname (default: `mongodb-auth`)
+* `MONGO_HOSTNAME` - MongoDB hostname (default: `auth-api-mongodb`)
 * `MONGO_PORT` - MongoDB port (default: `27017`)
-* `MONGO_DB` - MongoDB database name (default: `auth_db`)
+* `MONGO_DB` - MongoDB database name (default: `authApiDb`)
 
 * `AUTH_API_HOST` - Authentication API hostname (default: `0.0.0.0`)
 * `AUTH_API_PORT` - Authentication API port (default: `3000`)
