@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
-//SLB
+
 
 connectDB();
 const app = express();
