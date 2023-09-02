@@ -1,6 +1,5 @@
 const express = require('express');
 const connectDB = require('./config/db');
-//SLB
 
 connectDB();
 const app = express();
