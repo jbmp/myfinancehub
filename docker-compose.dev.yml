@@ -1,13 +1,17 @@
 version: '3'
 services:
-  auth-api:
+  auth-api-app:
     build:
+      args:
+        - NODE_ENV=development
       context: ./
+      target: development
       dockerfile: Dockerfile
-    container_name: auth-api-nodejs
+    container_name: auth-api-app
     restart: unless-stopped
     env_file: ./.env
     environment:
+      - PORT=${AUTH_API_PORT}
       - MONGO_USERNAME=${MONGO_USERNAME}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_HOSTNAME=${MONGO_HOSTNAME}
@@ -16,34 +20,35 @@ services:
     ports:
       - ${AUTH_API_PORT}:${AUTH_API_PORT}
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+      - ./build:/usr/app/build
     networks:
       - mfhnetwork
     depends_on:
-      - mongodb-auth
-    command: /usr/src/app/node_modules/.bin/nodemon app.js
+      - auth-api-db
+    #command: npm install # the node_modules on the host are for the architecture and OS of the host
+    command: npm run dev
 
-  mongodb-auth:
+  auth-api-db:
     build:
-      context: ./mongodb-auth-api
+      context: ./auth-api-db
       dockerfile: Dockerfile
-    container_name: auth-api-mongodb
+    container_name: auth-api-db
     restart: unless-stopped
     env_file: ./.env
     environment:
+      - MONGO_PORT=${MONGO_PORT}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     ports:
       - ${MONGO_PORT}:${MONGO_PORT}
     volumes:
-      - mongodb-auth-data:/data/db # Mount a volume for MongoDB data
+      - auth-api-mongodb-data:/data/db # Mount a volume for MongoDB data
     networks:
       - mfhnetwork
     
 volumes:
-  mongodb-auth-data:
-  node_modules:
+  auth-api-mongodb-data:
 
 networks:
   mfhnetwork:

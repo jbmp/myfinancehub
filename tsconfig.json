@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ES2021",
+      "module": "commonjs",
+      "sourceMap": true,
+      "rootDir": "./src",
+      "outDir": "./build",
+      "baseUrl": ".",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules"]
+  }

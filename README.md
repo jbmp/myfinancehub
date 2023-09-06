@@ -13,14 +13,17 @@ This is the authentication service for the My Finance Hub application. It is a R
 * Express
 * Mongoose
 * Dotenv
+* Cors
 * Dev Dependencies
-  * Nodemon
+  * Typescript
+  * Rimraf
+  * EsLint (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
+  * Ts-Node-Dev
 
 ### Installing & Executing
 
 * Clone the repository
-* `docker-compose -f docker-compose.dev.yml build`
-* `docker-compose -f docker-compose.dev.yml up`
+* `docker-compose -f docker-compose.dev.yml up --build`
 
 ### Environment Variables
 
@@ -29,9 +32,9 @@ Create a `.env` file (default values shown below, otherwise) in the root directo
 * 
 * `MONGO_USERNAME` - MongoDB username (default: `dev_user`)
 * `MONGO_PASSWORD` - MongoDB password (default: `dev_password`)
-* `MONGO_HOSTNAME` - MongoDB hostname (default: `mongodb-auth`)
+* `MONGO_HOSTNAME` - MongoDB hostname (default: `auth-api-mongodb`)
 * `MONGO_PORT` - MongoDB port (default: `27017`)
-* `MONGO_DB` - MongoDB database name (default: `auth_db`)
+* `MONGO_DB` - MongoDB database name (default: `authApiDb`)
 
 * `AUTH_API_HOST` - Authentication API hostname (default: `0.0.0.0`)
 * `AUTH_API_PORT` - Authentication API port (default: `3000`)
