@@ -14,13 +14,15 @@ This is the authentication service for the My Finance Hub application. It is a R
 * Mongoose
 * Dotenv
 * Dev Dependencies
-  * Nodemon
+  * Typescript
+  * Rimraf
+  * EsLint (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
+  * Ts-Node-Dev
 
 ### Installing & Executing
 
 * Clone the repository
-* `docker-compose -f docker-compose.dev.yml build`
-* `docker-compose -f docker-compose.dev.yml up`
+* `docker-compose -f docker-compose.dev.yml up --build`
 
 ### Environment Variables
 

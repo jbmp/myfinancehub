@@ -5,6 +5,7 @@ services:
       args:
         - NODE_ENV=development
       context: ./
+      target: development
       dockerfile: Dockerfile
     container_name: auth-api-app
     restart: unless-stopped
@@ -19,13 +20,14 @@ services:
     ports:
       - ${AUTH_API_PORT}:${AUTH_API_PORT}
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+      - ./build:/usr/app/build
     networks:
       - mfhnetwork
     depends_on:
       - auth-api-db
-    command: /usr/src/app/node_modules/.bin/nodemon app.js
+    #command: npm install # the node_modules on the host are for the architecture and OS of the host
+    command: npm run dev
 
   auth-api-db:
     build:
@@ -47,7 +49,6 @@ services:
     
 volumes:
   auth-api-mongodb-data:
-  node_modules:
 
 networks:
   mfhnetwork:
