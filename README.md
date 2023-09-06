@@ -13,6 +13,7 @@ This is the authentication service for the My Finance Hub application. It is a R
 * Express
 * Mongoose
 * Dotenv
+* Cors
 * Dev Dependencies
   * Typescript
   * Rimraf
