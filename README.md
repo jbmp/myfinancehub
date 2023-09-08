@@ -18,7 +18,7 @@ This is the authentication service for the My Finance Hub application. It is a R
   * Typescript
   * Rimraf
   * EsLint (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
-  * Tpx
+  * Tsx
 
 ### Installing & Executing
 
