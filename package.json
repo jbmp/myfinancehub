@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "build": "rimraf ./build && tsc",
-        "dev": "ts-node-dev ./src/app.ts",
+        "dev": "tsx watch ./src/app.ts",
         "start": "npm run build && node ./build/app.js",
         "lint": "eslint . --ext .ts"
     },
@@ -25,7 +25,7 @@
         "eslint-plugin-import": "2.28.1",
         "eslint-plugin-security": "^1.7.1",
         "rimraf": "^5.0.1",
-        "ts-node-dev": "^2.0.0",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "tsx": "^3.12.8"
     }
 }
