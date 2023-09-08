@@ -18,18 +18,22 @@ This is the authentication service for the My Finance Hub application. It is a R
   * Typescript
   * Rimraf
   * EsLint (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
-  * Ts-Node-Dev
+  * Tsx
 
 ### Installing & Executing
 
 * Clone the repository
 * `docker-compose -f docker-compose.dev.yml up --build`
 
+The `node_modules` folder is not bound between the host and container to maintain isolation. However, if you need to view its contents for the sake of IDE assistance, you can:
+
+* update the `docker-compose.dev.yml` to run `npm install` before the `npm run dev`
+* or run the `install_node_with_vm.sh` script and then run `npm install` locally. If you encounter permission-related complaints, you can resolve them by running `chmod +x` on it.
+
 ### Environment Variables
 
 Create a `.env` file (default values shown below, otherwise) in the root directory and add the following environment variables:
 
-* 
 * `MONGO_USERNAME` - MongoDB username (default: `dev_user`)
 * `MONGO_PASSWORD` - MongoDB password (default: `dev_password`)
 * `MONGO_HOSTNAME` - MongoDB hostname (default: `auth-api-mongodb`)
@@ -41,7 +45,7 @@ Create a `.env` file (default values shown below, otherwise) in the root directo
 
 ## Example Requests
 
-GET http://localhost:3000/users/list
+GET http://localhost:3000/users
 
 ---
 
@@ -51,8 +55,8 @@ Content-Type: application/json; charset=utf-8
 {
   "username": "jdoe123",
   "password": "P@ssw0rd",
-  "email": "john.doe@example.com",
-  "name": "John Doe"
+  "email": "jorge.bras@example.com",
+  "name": "Jorge Bras"
 }
 
 ---
