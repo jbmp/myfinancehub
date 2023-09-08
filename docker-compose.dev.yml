@@ -21,12 +21,11 @@ services:
       - ${AUTH_API_PORT}:${AUTH_API_PORT}
     volumes:
       - ./:/usr/src/app
-      - ./build:/usr/app/build
+      - /usr/src/app/node_modules # to keep separate node_modules for each container
     networks:
       - mfhnetwork
     depends_on:
       - auth-api-db
-    #command: npm install # the node_modules on the host are for the architecture and OS of the host
     command: npm run dev
 
   auth-api-db:
