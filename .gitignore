@@ -32,3 +32,6 @@ out/
 
 # Production build
 build/
+
+# Tests
+coverage/
