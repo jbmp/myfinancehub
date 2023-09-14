@@ -8,7 +8,7 @@
         "dev": "tsx watch ./src/app.ts",
         "start": "npm run build && node ./build/app.js",
         "lint": "eslint . --ext .ts",
-        "test": "jest --coverage --detectOpenHandles"
+        "test": "NODE_ENV=TEST && jest --coverage --detectOpenHandles"
     },
     "dependencies": {
         "cors": "^2.8.5",
@@ -33,6 +33,7 @@
         "supertest": "^6.3.3",
         "ts-jest": "^29.1.1",
         "tsx": "^3.12.8",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "mongodb-memory-server": "^7.4.4"
     }
 }

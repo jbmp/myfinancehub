@@ -1,16 +1,13 @@
 FROM node:18.17.0-alpine as development
 
 # Set NODE_ENV to production by default because switches middlewares
-# and dependencies to efficient code path and NPM installs only production dependencies
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-
+COPY  package*.json ./
 # https://vsupalov.com/docker-arg-env-variable-guide/
-ENV PORT=3000
 
 # Install bash for debugging and install project dependencies
 RUN apk add --no-cache bash \
@@ -26,19 +23,19 @@ CMD ["npm", "run", "build"]
 
 
 
-FROM node:18.17.0-alpine as production
+# FROM node:18.17.0-alpine as production
 
-# Set NODE_ENV to production by default because switches middlewares
-# and dependencies to efficient code path and NPM installs only production dependencies
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+# # Set NODE_ENV to production by default because switches middlewares
+# # and dependencies to efficient code path and NPM installs only production dependencies
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
-COPY package*.json ./
+# COPY package*.json ./
 
-RUN npm ci --only=production
+# RUN npm ci --only=production
 
-COPY --from=development /usr/src/app/build ./build
+# COPY --from=development /usr/src/app/build ./build
 
-CMD ["node", "build/index.js"]
+# CMD ["node", "build/index.js"]

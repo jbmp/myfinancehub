@@ -10,7 +10,8 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.get('/', (req, res) => {
+server.get('/', (req: any, res: any) => {
+  debugger
   res.send('Hello World paddasd jorge bras!');
 });
 server.use('/', router);
