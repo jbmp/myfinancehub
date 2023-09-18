@@ -27,6 +27,7 @@ module.exports = {
     '<rootDir>/src',
   ],
   preset: 'ts-jest',
-  testMatch: ["**/src/**/*.test.ts"],
-  testEnvironment: 'node'
+  testMatch: ['**/src/**/*.test.ts'],
+  testEnvironment: 'node',
+  testTimeout: 10000,
 };

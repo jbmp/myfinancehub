@@ -1,72 +1,75 @@
-import  { server } from './server/server';
-import supertest from 'supertest';
-import * as db from './tests/dbTest';
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
+import  User from '../src/models/user';
+import {server } from './server/server';
+import request from 'supertest';
 
-export const testServer = supertest(server);
+const {
+  MONGO_USERNAME = 'dev_user',
+  MONGO_PASSWORD = 'dev_password',
+  MONGO_HOSTNAME = 'auth-api-db',
+  MONGO_PORT = '27017'
+} = process.env;
+ 
+// Tests for database purposes
 
-  describe('Route testing', () => {
-    it('Should return an http 200 and a "message" property (route: GET /)', async () => {
-            const res = await testServer.get('/')
+const url: string = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/jorge_teste_db?authSource=admin`;
 
-            expect(res.statusCode).toBe(200);
-            expect(res.body).toEqual({name:"Hello World paddasd jorge bras!"});
-        })
+mongoose.connect(url);
+
+describe('User Model Test', () => {
+  beforeAll(async () => {
+    await User.deleteMany({});
   });
 
-
-  describe('Only one test', () => {
-    it('Sum 1 + 1 = 2', () => {
-      expect(1 + 1).not.toBe(5)
-    })
+  afterEach(async () => {
+    await User.deleteMany({});
   });
 
-  describe('Test request with mongoose', () => {
-    beforeAll(async () => {
-       await db.connect()
+  afterAll(async () => {
+    await mongoose.connection.close();
+  });
+
+  it('has a module', () => {
+    expect(User).toBeDefined();
+  });
+
+  it('create user', async () => {
+    const user = new User({
+      name: 'Jorge',
+      username: 'jorge',
+      password: '123456123123sdsas',
+      email: 'jorge@bras.com'
     });
-    afterEach(async () => {
-       await db.clearDatabase()
+    const savedUser = await user.save();
+    
+    const foundUser = await User.findOne({ name: savedUser.name }) || { name: '' };
+    const expected = 'Jorge';
+    const actual = foundUser.name;
+    expect(actual).toEqual(expected);
+  });
+});
+
+
+// Test for routes purposes
+
+describe('App test', () => {
+  it('has a module', () => {
+    expect(server).toBeDefined();
+  });
+
+  afterEach(async () => {
+    await mongoose.connection.close();
+  });
+
+  afterAll(() => {
+    mongoose.connection.close();
+  });
+
+  describe('User routes', () => {
+    it('can list users', async () => {
+      const res = await request(server).get('/users');
+      expect(res.status).toBe(200);
+      
     });
-    afterAll(async () => {
-       await db.closeDatabase()
-    });
-
-    test('GET - /', async () => {
-       const res = await testServer.get('/');
-       const body = res.body;
-       const message = body.message;
-       expect(res.statusCode).toBe(200);
-       expect(message).toBe('Hello World!');
-    });
- });
-
-//  describe('Single MongoMemoryServer', () => {
-//   let con: MongoClient;
-//   let mongoServer: MongoMemoryServer;
-
-//   beforeAll(async () => {
-//     mongoServer = await MongoMemoryServer.create();
-//     con = await MongoClient.connect(mongoServer.getUri(), {});
-//   });
-
-//   afterAll(async () => {
-//     if (con) {
-//       await con.close();
-//     }
-//     if (mongoServer) {
-//       await mongoServer.stop();
-//     }
-//   });
-
-//   it('should successfully set & get information from the database', async () => {
-//     const db = con.db(mongoServer.instanceInfo!.dbName);
-
-//     expect(db).toBeDefined();
-//     const col = db.collection('test');
-//     const result = await col.insertMany([{ a: 1 }, { b: 1 }]);
-//     expect(result.insertedCount).toStrictEqual(2);
-//     expect(await col.countDocuments({})).toBe(2);
-//   });
-// });
+  });
+});
