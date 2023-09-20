@@ -4,17 +4,7 @@ import { jestSetupDb } from '../../tests/test.setup';
 jestSetupDb();
 
 describe('User Model Test', () => {
-  beforeAll(async () => {
-    //await User.deleteMany({});
-  });
-  
-  afterEach(async () => {
-    //await User.deleteMany({});
-  });
-  
-  afterAll(async () => {
-  });
-  
+
   it('has a module', () => {
     expect(User).toBeDefined();
   });

@@ -1,4 +1,3 @@
-//import User from './user';
 import { jestSetupDb, jestSetupServer, request } from '../../tests/test.setup';
 
 jestSetupDb();

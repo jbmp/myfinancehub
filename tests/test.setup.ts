@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import mongoose from 'mongoose';
-import supertest = require('supertest');
+import supertest from 'supertest';
 import { IncomingMessage, Server, ServerResponse } from 'http';
 import { server } from '../src/server/server';
 
