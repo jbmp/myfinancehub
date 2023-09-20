@@ -1,7 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   clearMocks: true,
-
+  verbose: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
 
