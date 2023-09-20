@@ -1,5 +1,7 @@
+import connectDB from './config/db';
 import { server } from './server/server';
 
+connectDB();
 const hostname = process.env.AUTH_API_HOST || '0.0.0.0';
 const port = Number(process.env.AUTH_API_PORT) || 3000;
 
