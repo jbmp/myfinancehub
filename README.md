@@ -8,17 +8,23 @@ This is the authentication service for the My Finance Hub application. It is a R
 
 ### Dependencies
 
-* Node.js
-* MongoDB
-* Express
-* Mongoose
-* Dotenv
-* Cors
-* Dev Dependencies
-  * Typescript
-  * Rimraf
-  * EsLint (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
-  * Tsx
+* [Node.js](https://nodejs.org/en/)
+* [MongoDB](https://www.mongodb.com/)
+* [Express](https://github.com/expressjs/express#readme)
+* [Mongoose](https://github.com/Automattic/mongoose#readme)
+* [Dotenv](https://github.com/motdotla/dotenv#readme)
+* [Cors](https://github.com/expressjs/cors#readme)
+
+Dev Dependencies
+
+* [Typescript](https://github.com/microsoft/TypeScript/#readme)
+* [Rimraf](https://github.com/isaacs/rimraf#readme)
+* [ESLint](https://github.com/eslint/eslint#readme) (check  [typescript-eslint rules](https://typescript-eslint.io/rules/))
+* [Tsx](https://github.com/esbuild-kit/tsx#readme)
+* [Jest](https://github.com/jestjs/jest#readme)
+* [Supertest](https://github.com/ladjs/supertest#readme)
+* [Fishery](https://github.com/thoughtbot/fishery#readme)
+* [Faker](https://github.com/faker-js/faker#readme)
 
 ### Installing & Executing
 
