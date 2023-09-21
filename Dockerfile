@@ -1,13 +1,16 @@
 FROM node:18.17.0-alpine as development
 
 # Set NODE_ENV to production by default because switches middlewares
+# and dependencies to efficient code path and NPM installs only production dependencies
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
 COPY  package*.json ./
+
 # https://vsupalov.com/docker-arg-env-variable-guide/
+ENV PORT=3000
 
 # Install bash for debugging and install project dependencies
 RUN apk add --no-cache bash \

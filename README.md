@@ -29,8 +29,10 @@ Dev Dependencies
 ### Installing & Executing
 
 * Clone the repository
-* `docker-compose -f docker-compose.dev.yml up --build` to run in development mode
-* `docker-compose -f docker-compose.test.yml up --build` to run in test mode
+* `docker-compose -f docker-compose.dev.yml up` to run in development mode
+* `docker-compose -f docker-compose.test.yml up` to run in test mode
+
+Add `--build` if you want/need to rebuild the images.
 
 The `node_modules` folder is not bound between the host and container to maintain isolation. However, if you need to view its contents for the sake of IDE assistance, you can:
 
