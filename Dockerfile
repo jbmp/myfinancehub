@@ -7,7 +7,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY  package*.json ./
 
 # https://vsupalov.com/docker-arg-env-variable-guide/
 ENV PORT=3000

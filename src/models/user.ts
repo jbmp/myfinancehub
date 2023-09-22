@@ -1,15 +1,17 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-interface IUser extends Document {
-    username: string;
-    password: string;
-    email: string;
-    name: string;
-    active: number;
-    created_at: Date;
-    updated_at: Date;
-    deleted_at: Date | null;
+export interface IUser {
+  username: string;
+  password: string;
+  email: string;
+  name: string;
+  active: number;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date | null;
 }
+
+interface DUser extends IUser, Document {}
 
 const userSchema: Schema = new Schema({
   username: {
@@ -48,4 +50,4 @@ const userSchema: Schema = new Schema({
   }
 });
 
-export default mongoose.model<IUser>('User', userSchema);
+export default mongoose.model<DUser>('User', userSchema);
