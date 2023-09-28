@@ -13,6 +13,7 @@ module.exports = {
   coverageProvider: 'v8',
 
   coverageReporters: [
+    'html',
     'json',
     'text',
     'lcov',

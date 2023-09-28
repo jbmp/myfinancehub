@@ -1,0 +1,41 @@
+# CI - Merge code in
+name: Test API
+
+on:
+    pull_request:
+        branches: [main, dev]
+        paths:
+            - "myfinancehub-auth/**"
+            - ".github/workflows/myfinancehub-auth-ci.yml"
+
+jobs:
+    test_pull_request:
+        runs-on: ubuntu-latest
+        environment: dev
+        env:
+          AUTH_API_HOST: ${{ secrets.AUTH_API_HOST}}
+          AUTH_API_PORT: ${{ secrets.AUTH_API_PORT}}
+          MONGO_DB: ${{ secrets.MONGO_DB}}
+          MONGO_USERNAME: ${{ secrets.MONGO_HOSTNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD}}
+          MONGO_HOSTNAME: ${{ secrets.MONGO_HOSTNAME }}
+          MONGO_PORT: ${{ secrets.MONGO_PORT}}
+
+        steps:
+            - name: 'Checkout code'
+              uses: actions/checkout@v4 # brings source code into the current working directory
+
+            - name: 'Setup node environment'
+              uses: actions/setup-node@v3 # sets up node environment
+              with:
+                node-version: '18.17.0'
+
+            - name: 'Install dependencies'
+              run: |-
+                cd myfinancehub-auth
+                npm install
+
+            - name: 'Test auth API'
+              run: |-
+                cd myfinancehub-auth
+                npm run test

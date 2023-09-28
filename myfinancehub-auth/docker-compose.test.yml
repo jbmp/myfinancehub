@@ -1,15 +1,19 @@
+# not working at the moment with mongodb-memory-server
+# so you should run tets locally with
+# npm run test:watch or npm run test
+
 version: '3'
 services:
-  auth-api-app:
+  auth-api-app-test:
     build:
       args:
         - NODE_ENV=development
       context: ./
       target: development
       dockerfile: Dockerfile
-    container_name: auth-api-app
-    restart: unless-stopped
-    env_file: ./.env
+    container_name: auth-api-app-test
+    restart: 'no'
+    env_file: ./.env.test
     environment:
       - PORT=${AUTH_API_PORT}
       - MONGO_USERNAME=${MONGO_USERNAME}
@@ -25,16 +29,16 @@ services:
     networks:
       - mfhnetwork
     depends_on:
-      - auth-api-db
-    command: npm run test
+      - auth-api-db-test
+    command: npm run test:watch
 
-  auth-api-db:
+  auth-api-db-test:
     build:
       context: ./auth-api-db
       dockerfile: Dockerfile
-    container_name: auth-api-db
+    container_name: auth-api-db-test
     restart: unless-stopped
-    env_file: ./.env
+    env_file: ./.env.test
     environment:
       - MONGO_PORT=${MONGO_PORT}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
@@ -45,6 +49,7 @@ services:
       - auth-api-mongodb-data:/data/db # Mount a volume for MongoDB data
     networks:
       - mfhnetwork
+    #command: mongod --quiet --logpath /dev/null # --quiet to hide logs
     
 volumes:
   auth-api-mongodb-data:

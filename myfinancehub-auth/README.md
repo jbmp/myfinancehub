@@ -24,20 +24,22 @@ Dev Dependencies
 * [Jest](https://github.com/jestjs/jest#readme)
 * [Supertest](https://github.com/ladjs/supertest#readme)
 * [Fishery](https://github.com/thoughtbot/fishery#readme)
+* [Mongodb-Memory-Server](https://github.com/nodkz/mongodb-memory-server)
 * [Faker](https://github.com/faker-js/faker#readme)
 
 ### Installing & Executing
 
 * Clone the repository
-* `docker-compose -f docker-compose.dev.yml up` to run in development mode
-* `docker-compose -f docker-compose.test.yml up` to run in test mode
+* `docker-compose -f docker-compose.dev.yml --env-file .env.dev up` to run in development mode
+
+Without the environment file, the default values will be used.
 
 Add `--build` if you want/need to rebuild the images.
 
 The `node_modules` folder is not bound between the host and container to maintain isolation. However, if you need to view its contents for the sake of IDE assistance, you can:
 
 * update the `docker-compose.dev.yml` to run `npm install` before the `npm run dev`
-* or run the `install_node_with_vm.sh` script and then run `npm install` locally. If you encounter permission-related complaints, you can resolve them by running `chmod +x` on it.
+* or run the `install_node_with_nvm.sh` script and then run `npm install` locally. If you encounter permission-related complaints, you can resolve them by running `chmod +x` on it.
 
 ### Environment Variables
 
