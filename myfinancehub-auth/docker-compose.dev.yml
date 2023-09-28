@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     container_name: auth-api-app
     restart: unless-stopped
-    env_file: ./.env
+    env_file: ./.env.dev
     environment:
       - PORT=${AUTH_API_PORT}
       - MONGO_USERNAME=${MONGO_USERNAME}
@@ -34,7 +34,7 @@ services:
       dockerfile: Dockerfile
     container_name: auth-api-db
     restart: unless-stopped
-    env_file: ./.env
+    env_file: ./.env.dev
     environment:
       - MONGO_PORT=${MONGO_PORT}
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
@@ -45,6 +45,7 @@ services:
       - auth-api-mongodb-data:/data/db # Mount a volume for MongoDB data
     networks:
       - mfhnetwork
+    command: mongod --quiet --logpath /dev/null # --quiet to hide logs
     
 volumes:
   auth-api-mongodb-data:

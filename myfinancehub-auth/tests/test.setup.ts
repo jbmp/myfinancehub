@@ -5,16 +5,20 @@ import supertest from 'supertest';
 import { IncomingMessage, Server, ServerResponse } from 'http';
 import { server } from '../src/server/server';
 
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+const mongod = MongoMemoryServer.create();
 
 // DB Setup
 
+/*
 const {
   MONGO_USERNAME = 'dev_user',
   MONGO_PASSWORD = 'dev_password',
   MONGO_HOSTNAME = 'auth-api-db',
   MONGO_PORT = '27017'
 } = process.env;
-const url: string = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/test_db?authSource=admin`;
+*/
 
 async function removeAllCollections () {
   const collections = Object.keys(mongoose.connection.collections);
@@ -45,7 +49,10 @@ async function dropAllCollections () {
 export function jestSetupDb() {
   beforeAll(async() => {
     try {
-      await mongoose.connect(url);
+      // const url: string = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/test_db?authSource=admin`;
+      // await mongoose.connect(url);
+      const uri = await (await mongod).getUri();
+      await mongoose.connect(uri);
     } catch (err) {
       console.log('Error initializing db connection: ', err);
     }
@@ -54,6 +61,7 @@ export function jestSetupDb() {
   afterAll(async() => {
     await dropAllCollections();
     await mongoose.connection.close();
+    await (await mongod).stop();
   });
         
   beforeEach(() => {
