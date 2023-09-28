@@ -2,9 +2,8 @@
 name: Test API
 
 on:
-    # pull_request:
-    push: # push just for purpose of testing
-        #branches: [main, dev]
+    pull_request:
+        branches: [main, dev]
         paths:
             - "myfinancehub-auth/**"
             - ".github/workflows/myfinancehub-auth-ci.yml"

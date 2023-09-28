@@ -24,6 +24,7 @@ Dev Dependencies
 * [Jest](https://github.com/jestjs/jest#readme)
 * [Supertest](https://github.com/ladjs/supertest#readme)
 * [Fishery](https://github.com/thoughtbot/fishery#readme)
+* [Mongodb-Memory-Server](https://github.com/nodkz/mongodb-memory-server)
 * [Faker](https://github.com/faker-js/faker#readme)
 
 ### Installing & Executing
