@@ -1,0 +1,26 @@
+version: '3'
+services:
+  gateway-api-app:
+    build:
+      args:
+        - NODE_ENV=development
+      context: ./
+      target: development
+      dockerfile: Dockerfile
+    container_name: gateway-api-app
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - PORT=${GATEWAY_API_PORT}
+    ports:
+      - ${GATEWAY_API_PORT}:${GATEWAY_API_PORT}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules # to keep separate node_modules for each container
+    networks:
+      - mfhnetwork
+    command: npm run dev
+
+networks:
+  mfhnetwork:
+     driver: bridge # enables communication between containers since they are on the same Docker daemon host
